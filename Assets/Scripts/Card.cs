@@ -11,7 +11,7 @@ public class Card : MonoBehaviour
         transform.position = position;
     } 
 
-    public void ThrowFromPosition(Vector3 position)
+    public void ThrowWithTrajectory(Trajectory trajectory)
     {
 
     }
