@@ -33,7 +33,7 @@ public class Game : MonoBehaviour
     void Update()
     {
 
-#if !UNITY_EDITOR
+#if (UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
 
         if(Input.touches.Length > 0)
         {
