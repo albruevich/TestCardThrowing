@@ -9,6 +9,8 @@ public class Game : MonoBehaviour
     [SerializeField]
     private CardsFactory _cardsFactory;
     [SerializeField]
+    private AimFactory _aimFactory;
+    [SerializeField]
     private DrawTrajectory _drawTrajectory;
 
     private Card _currentCard;
@@ -23,6 +25,7 @@ public class Game : MonoBehaviour
     private void Start()
     {
         _mainCamera = Camera.main;
+        CreateAims();
         StartCoroutine(CreateNewCard(0f));        
     }
 
@@ -30,6 +33,11 @@ public class Game : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         _currentCard = _cardsFactory.Get();
+    }
+
+    private void CreateAims()
+    {
+        _aimFactory.CreateAims();
     }
 
     void Update()

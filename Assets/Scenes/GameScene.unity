@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardsFactory: {fileID: 11400000, guid: 1151a5c943bc946e78e0085acf1cda43, type: 2}
+  _aimFactory: {fileID: 11400000, guid: ca3abd24b800145cfa2ffb26758fcd41, type: 2}
   _drawTrajectory: {fileID: 2137424032}
 --- !u!4 &1444790810
 Transform:
