@@ -96,7 +96,7 @@ public class Game : MonoBehaviour
         _trajectory = null;
         _currentCard = null;
 
-        StartCoroutine(CreateNewCard(1f));
+        StartCoroutine(CreateNewCard(0.7f));
     } 
 
     private void CreateNewPosition(Vector3 position)

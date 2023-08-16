@@ -37,9 +37,12 @@ public class Trajectory
         Vector3[] array = _points.ToArray();
         Vector3 differ = array[0] - position;
 
+        int i = 0;
         foreach (Vector3 v in array)
-        {           
-            _workPpoints.Enqueue(new Vector3(v.x - differ.x, position.y, v.z - differ.z));
+        {
+            _workPpoints.Enqueue(new Vector3(v.x - differ.x,
+                position.y + i * GameSettings.VerticalTrajectorySpeed, v.z - differ.z));
+            i++;
         }
     }
 

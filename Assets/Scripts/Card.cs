@@ -42,13 +42,13 @@ public class Card : MonoBehaviour
                 v2 = pos;
         }       
 
-        Vector3 impulse = Vector3.ClampMagnitude((v2 - v1) * 200f, 60f);       
+        Vector3 impulse = Vector3.ClampMagnitude((v2 - v1) * 200f, 90f);       
         _rigidbody.AddForce(impulse, ForceMode.Impulse);
         _rigidbody.useGravity = true;
 
         trajectory.ClearWorkPoints();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
 
         Reclaim();
     }
