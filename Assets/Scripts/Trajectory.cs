@@ -3,37 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Trajectory 
-{    
-    const int _maxPointsCount = 40;
-
+{  
     private Queue<Vector3> _points = new Queue<Vector3>();
+    private Queue<Vector3> _workPpoints = new Queue<Vector3>();
 
-    public Vector3[] Points => _points.ToArray();   
+    public Vector3[] Points => _points.ToArray();
 
-
-    private Game _game;
-
-    public Trajectory(Game game)
-    {
-        _game = game;
-    }
+    public int Count => _points.Count;
+    public int WorkCount => _workPpoints.Count;
 
     public void AddPoint(Vector3 vector)
     {
         _points.Enqueue(vector);
 
-        if (_points.Count > _maxPointsCount)
+        if (_points.Count > GameSettings.MaxPointsCount)
             _points.Dequeue();       
     }
 
     public Vector3 UsePoint()
-    {
-        return _points.Dequeue();
+    {     
+        if(_workPpoints.Count > 0)
+            return _workPpoints.Dequeue();
+        return Vector3.zero;
     }    
-   
+  
+    public void CorrectPointsForPosition(Vector3 position)
+    {
+        if (_points.Count == 0)
+            return;
+
+        _workPpoints.Clear();
+
+        Vector3[] array = _points.ToArray();
+        Vector3 differ = array[0] - position;
+
+        foreach (Vector3 v in array)
+        {           
+            _workPpoints.Enqueue(new Vector3(v.x - differ.x, position.y, v.z - differ.z));
+        }
+    }
 
     public void Clear()
     {
         _points.Clear();       
+    }
+
+    public void ClearWorkPoints()
+    {
+        _workPpoints.Clear();
     }
 }

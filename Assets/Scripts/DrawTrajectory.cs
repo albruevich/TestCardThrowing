@@ -5,9 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class DrawTrajectory : MonoBehaviour
 {
-    private LineRenderer _lineRenderer;
-
-    const int _maxPointsCount = 40;
+    private LineRenderer _lineRenderer;   
 
     private Queue<Vector3> _points = new Queue<Vector3>();
 
@@ -30,7 +28,7 @@ public class DrawTrajectory : MonoBehaviour
     {
         _points.Enqueue(vector);
 
-        if (_points.Count > _maxPointsCount)
+        if (_points.Count > GameSettings.MaxPointsCount)
             _points.Dequeue();
 
         UpdateLine(_points.ToArray());

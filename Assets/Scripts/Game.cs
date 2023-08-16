@@ -1,4 +1,4 @@
-//#define DRAW_GIZMOS
+#define DRAW_GIZMOS
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,16 +18,18 @@ public class Game : MonoBehaviour
     private Camera _mainCamera;
 
     private Plane _xyPlane;
-    private float _lastPlaneZ = 0;
-
-    const float _startZ = 5f;
-    static readonly Vector3 _startCardPosition = new Vector3(0f, -4.4f, _startZ);   
+    private float _lastPlaneZ = 0;      
 
     private void Start()
     {
         _mainCamera = Camera.main;
+        StartCoroutine(CreateNewCard(0f));        
+    }
+
+    private IEnumerator CreateNewCard(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         _currentCard = _cardsFactory.Get();
-        _currentCard.SetPosition(_startCardPosition);
     }
 
     void Update()
@@ -70,7 +72,7 @@ public class Game : MonoBehaviour
         if (_currentCard == null)
             return;
 
-        _trajectory = new Trajectory(this);
+        _trajectory = new Trajectory();
         CreateNewPosition(position);        
     }
 
@@ -92,13 +94,16 @@ public class Game : MonoBehaviour
         _drawTrajectory.Clear();
         _trajectory.Clear();
         _trajectory = null;
+        _currentCard = null;
+
+        StartCoroutine(CreateNewCard(1f));
     } 
 
     private void CreateNewPosition(Vector3 position)
-    {
-        Vector3 pos = WorldPositionOnPlane(position, _startZ + position.y * 0.01f);        
+    {     
+        Vector3 pos = WorldPositionOnPlane(position, GameSettings.StartZ + position.y * GameSettings.TrajectorySpeed);        
         _drawTrajectory.AddPoint(pos);
-        pos.y = 0;
+        pos.y = _currentCard.transform.position.y;
         _trajectory.AddPoint(pos);
     }
 

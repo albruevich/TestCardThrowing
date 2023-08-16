@@ -16,8 +16,9 @@ public class CardsFactory : GameObjectFactory
 
     public Card Get()
     {
-        Card instance = CreateGameObjectInstance(_cardPrefab);
-        instance.OriginFactory = this;
-        return instance;
+        Card card = CreateGameObjectInstance(_cardPrefab);
+        card.OriginFactory = this;
+        card.SetPosition(GameSettings.StartCardPosition);
+        return card;
     }
 }
