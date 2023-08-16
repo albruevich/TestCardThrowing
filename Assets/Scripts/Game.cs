@@ -1,7 +1,6 @@
-#define DRAW_GIZMOS
+//#define DRAW_GIZMOS
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -79,7 +78,7 @@ public class Game : MonoBehaviour
     {              
         if (_currentCard == null)
             return;
-
+     
         _trajectory = new Trajectory();
         CreateNewPosition(position);        
     }
@@ -87,7 +86,7 @@ public class Game : MonoBehaviour
     private void TouchMoved(Vector3 position)
     {
         if (_trajectory == null || _currentCard == null)
-            return;
+            return;       
 
         CreateNewPosition(position);
     }
@@ -95,17 +94,22 @@ public class Game : MonoBehaviour
     private void TouchEnded(Vector3 position)
     {
         if (_trajectory == null || _currentCard == null)
-            return;     
+            return;
 
         _currentCard.ThrowWithTrajectory(_trajectory);
 
-        _drawTrajectory.Clear();
-        _trajectory.Clear();
-        _trajectory = null;
+        ClearTrajectory();
         _currentCard = null;
 
         StartCoroutine(CreateNewCard(0.7f));
     } 
+
+    private void ClearTrajectory()
+    {
+        _drawTrajectory.Clear();
+        _trajectory.Clear();
+        _trajectory = null;       
+    }
 
     private void CreateNewPosition(Vector3 position)
     {     
