@@ -15,7 +15,7 @@ public class Trajectory
     {
         _points.Enqueue(vector);
 
-        if (_points.Count > GameSettings.MaxPointsCount)
+        if (_points.Count > GameConfig.Instance.MaxPointsCount)
             _points.Dequeue();       
     }
 
@@ -40,7 +40,7 @@ public class Trajectory
         foreach (Vector3 v in array)
         {
             _workPpoints.Enqueue(new Vector3(v.x - differ.x,
-                position.y + i * GameSettings.VerticalTrajectorySpeed, v.z - differ.z));
+                position.y + i * GameConfig.Instance.VerticalTrajectorySpeed, v.z - differ.z));
             i++;
         }
     }

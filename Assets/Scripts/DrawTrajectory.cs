@@ -8,11 +8,11 @@ public class DrawTrajectory : MonoBehaviour
 
     private Queue<Vector3> _points = new Queue<Vector3>();
 
-    private void Start()
+    public void Init()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         Clear();
-    }
+    }  
 
     private void UpdateLine(Vector3[] points)
     {
@@ -27,7 +27,7 @@ public class DrawTrajectory : MonoBehaviour
     {
         _points.Enqueue(vector);
 
-        if (_points.Count > GameSettings.MaxPointsCount)
+        if (_points.Count > GameConfig.Instance.MaxPointsCount)
             _points.Dequeue();
 
         UpdateLine(_points.ToArray());

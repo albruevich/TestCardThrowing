@@ -21,12 +21,12 @@ public class Game : MonoBehaviour
     private Plane _xyPlane;
     private float _lastPlaneZ = 0;      
 
-    private void Start()
+    public void Init()
     {
         _mainCamera = Camera.main;
         CreateAims();
-        StartCoroutine(CreateNewCard(0f));        
-    }
+        StartCoroutine(CreateNewCard(0f));
+    } 
 
     private IEnumerator CreateNewCard(float delay)
     {
@@ -113,7 +113,7 @@ public class Game : MonoBehaviour
 
     private void CreateNewPosition(Vector3 position)
     {     
-        Vector3 pos = WorldPositionOnPlane(position, GameSettings.StartZ + position.y * GameSettings.TrajectorySpeed);        
+        Vector3 pos = WorldPositionOnPlane(position, GameConfig.Instance.StartZ + position.y * GameConfig.Instance.TrajectorySpeed);        
         _drawTrajectory.AddPoint(pos);
         pos.y = _currentCard.transform.position.y;
         _trajectory.AddPoint(pos);

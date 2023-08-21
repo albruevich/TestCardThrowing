@@ -16,7 +16,7 @@ public class CardsFactory : GameObjectFactory
     {
         Card card = CreateGameObjectInstance(_cardPrefab);
         card.OriginFactory = this;
-        card.SetPosition(GameSettings.StartCardPosition);
+        card.SetPosition(GameConfig.Instance.StartCardPosition);
         return card;
     }
 }
